@@ -17,6 +17,17 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
 
+            int codeBlockOpen;
+            codeBlockOpen = markdown.indexOf("```", currentIndex);
+            if(currentIndex != 0){
+                codeBlockOpen = markdown.indexOf("\n```", currentIndex);
+            }
+            if(codeBlockOpen < openBracket && codeBlockOpen != -1) {
+                int codeBlockClose = markdown.indexOf("\n```", codeBlockOpen);
+                currentIndex = codeBlockClose + 1;
+                continue;
+            }
+
             if(openBracket == -1 || closeBracket == -1
                   || closeParen == -1 || openParen == -1) {
                 return toReturn;
