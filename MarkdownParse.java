@@ -22,10 +22,12 @@ public class MarkdownParse {
             if(currentIndex != 0){
                 codeBlockOpen = markdown.indexOf("\n```", currentIndex);
             }
-            if(codeBlockOpen < openBracket && codeBlockOpen != -1) {
+            if(codeBlockOpen != -1) {
                 int codeBlockClose = markdown.indexOf("\n```", codeBlockOpen);
-                currentIndex = codeBlockClose + 1;
-                continue;
+                if(codeBlockClose !=-1){
+                    currentIndex = codeBlockClose + 1;
+                    continue;
+                }
             }
 
             if(openBracket == -1 || closeBracket == -1
