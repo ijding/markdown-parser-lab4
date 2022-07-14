@@ -28,12 +28,13 @@ jobs:
       # Runs a single command using the runners shell
       # This was part of the template github created
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: |
+          echo Hello, world!
+          echo help
+        
 
       # Runs a set of commands using the runners shell
-      # This compiles MarkdownParse and then the junit tests
-      - name: Run junit tests
-        run: |
-          javac MarkdownParse.java
-          javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar MarkdownParseTest.java
-          java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore MarkdownParseTest
+      # This runs the makefile, which only compiles what is necessary
+      - name: Run junit tests (makefile)
+        run:
+          make test
